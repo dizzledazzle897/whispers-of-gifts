@@ -1,188 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Gift Whisperer</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-    body { display: flex; min-height: 100vh; background: #fff0f5; }
-    nav {
-      width: 250px;
-      background: #ff69b4;
-      color: white;
-      padding: 2rem 1rem;
-      position: fixed;
-      height: 100vh;
-    }
-    nav h1 {
-      font-size: 24px;
-      margin-bottom: 2rem;
-    }
-    nav a {
-      display: block;
-      color: white;
-      text-decoration: none;
-      padding: 10px 0;
-      font-weight: bold;
-    }
-    nav a:hover {
-      background-color: #d63384;
-      padding-left: 10px;
-      transition: 0.3s;
-    }
-
-    main {
-      margin-left: 260px;
-      padding: 2rem;
-      flex: 1;
-    }
-    section {
-      margin-bottom: 3rem;
-    }
-    h2 {
-      color: #d63384;
-      margin-bottom: 1rem;
-    }
-
-    /* Products Grid */
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
-    .product {
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 1rem;
-      text-align: center;
-    }
-    .product img {
-      max-width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .price {
-      color: #444;
-      margin: 0.5rem 0;
-      font-weight: bold;
-    }
-    .order-btn {
-      background: #d63384;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      nav {
-        position: relative;
-        width: 100%;
-        height: auto;
-      }
-      main {
-        margin-left: 0;
-      }
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+    body { background: #fff; color: #333; }
+    header { background: #f6f6f6; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; font-weight: bold; }
+    .cart-btn { position: relative; cursor: pointer; }
+    .cart-count { background: red; color: #fff; font-size: 0.75rem; border-radius: 50%; padding: 2px 6px; position: absolute; top: -8px; right: -10px; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; padding: 2rem; }
+    .product-card { border: 1px solid #ddd; border-radius: 10px; padding: 1rem; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.05); }
+    .product-card img { width: 100%; height: 150px; object-fit: cover; margin-bottom: 10px; border-radius: 8px; }
+    .product-card h3 { font-size: 1.1rem; margin-bottom: 5px; }
+    .product-card p { margin-bottom: 10px; font-weight: bold; }
+    .add-btn { padding: 8px 12px; background: #ff69b4; border: none; color: #fff; border-radius: 5px; cursor: pointer; }
+    .cart-page, .checkout-page { display: none; padding: 2rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    .checkout-form input, .checkout-form textarea { display: block; width: 100%; margin-bottom: 1rem; padding: 8px; }
+    .nav { background: #f0f0f0; padding: 0.5rem 2rem; }
+    .nav a { margin-right: 15px; text-decoration: none; color: #444; font-weight: bold; }
   </style>
 </head>
 <body>
-  <nav>
-    <h1>Gift Whisperer</h1>
-    <a href="#home">🏠 Home</a>
-    <a href="#products">🎁 Products</a>
-    <a href="#faqs">❓ FAQs</a>
-    <a href="#terms">📄 Terms</a>
-    <a href="#contact">📬 Contact</a>
-    <a href="#about">🙋‍♀️ About</a>
-  </nav>
-
+  <header>
+    <div class="logo">The Gift Whisperer</div>
+    <div class="cart-btn" onclick="showCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span></div>
+  </header>
+  <div class="nav">
+    <a href="#" onclick="showHome()">Home</a>
+    <a href="#" onclick="showCheckout()">Checkout</a>
+    <a href="#" onclick="alert('FAQs and Terms will be added here soon')">FAQs</a>
+  </div>
   <main>
-    <!-- Home / Products Display -->
-    <section id="home">
-      <h2>Our Featured Products</h2>
-      <div class="products">
-        <div class="product">
-          <img src="https://via.placeholder.com/200x150?text=Candle" alt="Scented Candle">
-          <p>Scented Candle</p>
-          <p class="price">Rs. 999</p>
-          <button class="order-btn">Order Now</button>
-        </div>
-        <div class="product">
-          <img src="https://via.placeholder.com/200x150?text=Perfume" alt="Roll-on Perfume">
-          <p>Roll-on Perfume</p>
-          <p class="price">Rs. 799</p>
-          <button class="order-btn">Order Now</button>
-        </div>
-        <div class="product">
-          <img src="https://via.placeholder.com/200x150?text=Bracelet" alt="Name Bracelet">
-          <p>Name Bracelet</p>
-          <p class="price">Rs. 1199</p>
-          <button class="order-btn">Order Now</button>
-        </div>
-        <div class="product">
-          <img src="https://via.placeholder.com/200x150?text=Makeup+Kit" alt="Mini Makeup Kit">
-          <p>Mini Makeup Kit</p>
-          <p class="price">Rs. 1499</p>
-          <button class="order-btn">Order Now</button>
-        </div>
-      </div>
+    <section class="products" id="homePage"></section>
+    <section class="cart-page" id="cartPage">
+      <h2>Your Cart</h2>
+      <div id="cartItems"></div>
+      <h3>Total: Rs. <span id="totalPrice">0</span></h3>
     </section>
-
-    <!-- Products Section -->
-    <section id="products">
-      <h2>All Products</h2>
-      <p>We offer a wide variety of custom-prepared gift items ready to deliver love in a box. More products coming soon!</p>
-    </section>
-
-    <!-- FAQs -->
-    <section id="faqs">
-      <h2>FAQs</h2>
-      <p><strong>Q:</strong> Do you offer Cash on Delivery (COD)?<br><strong>A:</strong> Yes, we offer COD across Pakistan.</p>
-      <p><strong>Q:</strong> Can I choose the product design?<br><strong>A:</strong> No, all items are already custom-made by our team.</p>
-      <p><strong>Q:</strong> How long does delivery take?<br><strong>A:</strong> 3–7 business days depending on your city.</p>
-    </section>
-
-    <!-- Terms and Conditions -->
-    <section id="terms">
-      <h2>Terms & Conditions</h2>
-      <ul>
-        <li>No returns or exchanges once the product is delivered unless damaged.</li>
-        <li>All customizations are final and handled by our team.</li>
-        <li>Customer information will be kept private and used only for order fulfillment.</li>
-      </ul>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <form action="#" method="POST">
-        <label for="name">Full Name *</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="phone">Phone Number *</label>
-        <input type="tel" id="phone" name="phone" required>
-
-        <label for="email">Email *</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="message">Your Message / Order Info</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <button type="submit" class="order-btn">Send</button>
+    <section class="checkout-page" id="checkoutPage">
+      <h2>Checkout</h2>
+      <form class="checkout-form" onsubmit="submitOrder(event)">
+        <input type="text" placeholder="Full Name" required />
+        <input type="tel" placeholder="Phone Number" required />
+        <textarea placeholder="Address" rows="3" required></textarea>
+        <button type="submit">Place Order</button>
       </form>
     </section>
-
-    <!-- About -->
-    <section id="about">
-      <h2>About Us</h2>
-      <p>The Gift Whisperer is a small online gift store offering hand-curated, ready-to-ship products like perfumes, candles, jewelry, and makeup kits. We specialize in crafting thoughtful gifts so you don’t have to. 💝</p>
-    </section>
   </main>
+
+  <script>
+    const products = [
+      { id: 1, name: "Blossom Candle", price: 799, image: "https://via.placeholder.com/200" },
+      { id: 2, name: "Velvet Rose Perfume", price: 1299, image: "https://via.placeholder.com/200" },
+      { id: 3, name: "Crystal Heart Pendant", price: 999, image: "https://via.placeholder.com/200" },
+      { id: 4, name: "Midnight Lip Gloss", price: 499, image: "https://via.placeholder.com/200" },
+      { id: 5, name: "Signature Gift Box", price: 1499, image: "https://via.placeholder.com/200" },
+    ];
+
+    const cart = [];
+
+    function showHome() {
+      document.getElementById("homePage").style.display = "grid";
+      document.getElementById("cartPage").style.display = "none";
+      document.getElementById("checkoutPage").style.display = "none";
+    }
+
+    function showCart() {
+      document.getElementById("homePage").style.display = "none";
+      document.getElementById("cartPage").style.display = "block";
+      document.getElementById("checkoutPage").style.display = "none";
+      updateCart();
+    }
+
+    function showCheckout() {
+      document.getElementById("homePage").style.display = "none";
+      document.getElementById("cartPage").style.display = "none";
+      document.getElementById("checkoutPage").style.display = "block";
+    }
+
+    function addToCart(id) {
+      const item = cart.find(p => p.id === id);
+      if (item) item.qty++;
+      else cart.push({ ...products.find(p => p.id === id), qty: 1 });
+      document.getElementById("cartCount").innerText = cart.reduce((sum, i) => sum + i.qty, 0);
+      alert("Added to cart");
+    }
+
+    function updateCart() {
+      let html = '<table><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th></tr>';
+      let total = 0;
+      cart.forEach(item => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        html += `<tr><td>${item.name}</td><td>${item.price}</td><td>${item.qty}</td><td>${subtotal}</td></tr>`;
+      });
+      html += '</table>';
+      document.getElementById("cartItems").innerHTML = html;
+      document.getElementById("totalPrice").innerText = total;
+    }
+
+    function submitOrder(e) {
+      e.preventDefault();
+      alert("Order submitted! We'll contact you soon.");
+      cart.length = 0;
+      document.getElementById("cartCount").innerText = 0;
+      showHome();
+    }
+
+    function loadProducts() {
+      const container = document.getElementById("homePage");
+      products.forEach(p => {
+        container.innerHTML += `
+          <div class="product-card">
+            <img src="${p.image}" alt="${p.name}" />
+            <h3>${p.name}</h3>
+            <p>Rs. ${p.price}</p>
+            <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+          </div>
+        `;
+      });
+    }
+
+    loadProducts();
+  </script>
 </body>
 </html>
